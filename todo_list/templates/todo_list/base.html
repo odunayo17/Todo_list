@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Odun's List</title>
+    <!-- Include Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'todo_list/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href=" {% static 'todo_list/favicon-32x32.png' %} ">
+    <link rel="icon" type="image/png" sizes="16x16" href=" {% static 'todo_list/favicon-16x16.png' %} ">
+    <link rel="manifest" href="/site.webmanifest">
+  </head>
+
+  <style>
+    /* Style for each to-do item */
+    ul {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      margin: 5px 0;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+    }
+
+    /* Style for the to-do item text */
+    li {
+      flex: 1;
+    }
+
+    /* Style for the "Add Task" button */
+    .add-button {
+      float: right;
+    }
+
+    .trash-outline {
+      color: #d80909e1;
+    }
+    .create {
+      color: #2196f3;
+    }
+
+    .created {
+      font-size: 13px;
+    }
+
+    label {
+      display: none;
+    }
+
+    .for {
+      margin-bottom: 250px;
+      margin-top: 50px;
+    }
+
+    ion-icon {
+      font-size:17px;
+    }
+    .icon {
+      float:right;
+    }
+
+    /* Style for the "Complete" checkbox */
+    .complete-checkbox {
+      margin-right: 10px;
+    }
+  </style>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand text-light" href="/">Odun's List</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-primary border-primary">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% if user.is_superuser %}
+
+            <p></p>
+            {% else %}
+
+            <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'delete_acc' %}">Delete<span class="text-primary">_</span>account</a>
+            </li>
+            {% endif %}
+
+          {% else %}
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'register' %}">Signup</a>
+            </li>
+          {% endif %}
+          
+      </div>
+    </div>
+  </nav>
+
+
+
+  <body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+    {% block body %} {% endblock body %}
+
+    <!-- Include Bootstrap JS and custom JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>

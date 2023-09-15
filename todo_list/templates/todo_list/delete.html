@@ -1,0 +1,14 @@
+{% extends 'todo_list/base.html' %} {% block body %}
+<form method="POST" action="" class="container mt-5">
+  {% csrf_token %}
+  <h2>Are you sure you want to delete "{{obj}}"?</h2>
+  <div class="mt-4">
+    <a
+      class="me-5 btn btn-outline-primary"
+      href="{{request.META.HTTP_REFERER}}"
+      >Go Back</a
+    >
+    <input class="btn btn-danger " type="submit" value="Confirm" />
+  </div>
+</form>
+{% endblock body %}

@@ -1,0 +1,46 @@
+{% extends 'todo_list/base.html' %}
+
+    {% block body %} 
+        
+        <div class="container mt-5">
+          <h2 class="mb-4 ">{{ user.username|capfirst }} List</h2>
+
+          {% for li in todo %}
+          
+          <ul>
+            <li class="fw-medium">
+              <p class="fw-normal created">Created- {{li.created|date:"y-m-d" }}  ({{li.created|time:"H:i:s"}})</p>
+              <div class="d-flex justify-content-between">
+                <!--<p class="fw-small">Updated- {{li.updated|date:"y-m-d"}}  ({{li.updated|time:"H:i:s"}})</p>-->
+              </div>
+              {{li.add|capfirst}}
+              <div class="mt-2 icon">
+                <a href="{% url 'update' li.id %}"
+                  ><ion-icon class="create" name="create"></ion-icon
+                ></a>
+                <a href="{% url 'delete' li.id %}"
+                  ><ion-icon class="trash-outline" name="trash"></ion-icon
+                ></a>
+                
+              </div>
+            </li>
+          </ul>
+          {% empty %}
+
+            <h2 class="text-center">No Todo's Yet</h2>
+
+          {% endfor %}
+
+          <form method="POST" action="" class="for">
+            {% csrf_token %} {{form.as_p}}
+            <input
+              class="btn btn-primary add-button"
+              type="submit"
+              value="Add Task"
+            />
+          </form>
+        </div>
+
+    {% endblock body %}
+  </body>
+</html>

@@ -1,0 +1,128 @@
+{% extends 'todo_list/base.html' %}
+
+{% block body %}
+<style>
+  /* styles.css */
+
+  /* Style the form container */
+  form {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style form fields and labels */
+  label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+  }
+  
+  /* Style the submit button */
+  button[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+      background-color: #0056b3;
+  }
+  
+  /* Style the link to registration page */
+  p a {
+      color: #007bff;
+  }
+
+  /* Style error messages */
+  .error-message {
+      color: red;
+  }
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-3 text-decoration-underline">Signup</h2>            
+            <div class="card-body">
+                <form method="post" class="registration-form mb-5">
+                    {% csrf_token %}
+                    
+                    {% for error in form.username.errors %}
+                        <p class="error-message">{{ error }}</p>
+                    {% endfor %}
+                    
+                    {% for error in form.password2.errors %}
+                        <p class="error-message">{{ error }}</p>
+                    {% endfor %}
+                    
+                    {% for error in form.password1.errors %}
+                        <p class="error-message">{{ error }}</p>
+                    {% endfor %}
+                    
+                    {% for error in form.last_name.errors %}
+                        <p class="error-message">{{ error }}</p>
+                    {% endfor %}
+                    
+                    {% for error in form.first_name.errors %}
+                        <p class="error-message">{{ error }}</p>
+                    {% endfor %}
+                    
+                    {% for error in form.email.errors %}
+                        <p class="error-message">{{ error }}</p>
+                    {% endfor %}
+                    <div class="form-group">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.first_name.label_tag }}
+                        {{ form.first_name }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.last_name.label_tag }}
+                        {{ form.last_name }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.password1.label_tag }}
+                        {{ form.password1 }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.password2.label_tag }}
+                        {{ form.password2 }}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Signup</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,16 @@
+{% extends 'todo_list/base.html' %}
+
+{% block body %}
+<div class="container">
+<h4 class="mt-5 mb-3">Are you sure you want to delete your account? This action cannot be undone.</h4>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <div class="mt-4">
+    <a class="me-5 btn btn-outline-primary" href="{{request.META.HTTP_REFERER}}">Cancel</a>
+    <button type="submit" class="btn btn-danger">Delete Account</button>
+    </div>
+</form>
+</div>
+{% endblock body %}
